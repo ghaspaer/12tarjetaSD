@@ -1,0 +1,48 @@
+ra grabar los datos en un archivo de texto localizado en una tarjeta SD comienza obteniendo el directorio raiz de la tarjeta a travŒ·ŒÈŒ›s del mŒ·ŒÈŒ›todo getExternalStorageDirectory(), el mismo retorna un objeto de la clase File.
+    public void grabar(View v) {
+        String nomarchivo = et1.getText().toString();
+        String contenido=et2.getText().toString();
+        try
+        {
+            File tarjeta = Environment.getExternalStorageDirectory();
+Creamos un nuevo objeto de la clase File indicando el camino de la unidad SD y el nombre del archivo a crear:
+            File file = new File(tarjeta.getAbsolutePath(), nomarchivo);
+Por Œ·ŒıŒÈltimo similar al acceso de un archivo interno creamos un objeto de la clase OutputStreamWriter:
+            OutputStreamWriter osw =new OutputStreamWriter(new FileOutputStream(file));
+Grabamos el contenido del EditText:
+            osw.write(contenido);
+Cerramos el archivo:
+            osw.flush();
+            osw.close();
+            Toast.makeText(this,"Los datos fueron grabados correctamente",Toast.LENGTH_SHORT).show();
+            et1.setText("");
+            et2.setText("");
+        }
+        catch (IOException ioe)
+        {
+        }
+    }
+Para la lectura del archivo nuevamente obtenemos la referencia de la tarjeta SD para obtener el path de la unidad de almacenamiento, el resto del algoritmo es similar al visto con un archivo interno:
+    public void recuperar(View v) {
+        String nomarchivo = et1.getText().toString();        
+        File tarjeta = Environment.getExternalStorageDirectory();
+        File file = new File(tarjeta.getAbsolutePath(), nomarchivo);        
+        try {
+            FileInputStream fIn = new FileInputStream(file);         
+            InputStreamReader archivo=new InputStreamReader(fIn);
+            BufferedReader br=new BufferedReader(archivo);
+            String linea=br.readLine();
+            String todo="";
+            while (linea!=null)
+            {
+                todo=todo+linea+"\n";
+                linea=br.readLine();
+            }
+            br.close();
+            archivo.close();
+            et2.setText(todo);
+
+        } catch (IOException e)
+        {
+        }
+    }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, TarjetaSDActivity!</string>
+    <string name="app_name">12TarjetaSD</string>
+    <string name="grabar">Grabar</string>
+    <string name="recuperar">Recuperar</string>
+    <string name="nomArch">Nombre del Archivo</string>
+    <string name="contenido">Contenido</string>
+
+</resources>
